@@ -252,7 +252,7 @@ const char *appid_ifm(int i)
 void protodec_msg_40(unsigned char *buffer, int bufferlen, int msg_start, time_t received_t, unsigned long mmsi)
 {
 	int people_on_board = protodec_henten(msg_start, 13, buffer);
-	printf(" persons-on-board %d", people_on_board);
+	/* printf(" persons-on-board %d", people_on_board); */
 	if (cache_positions)
 		cache_vessel_persons(received_t, mmsi, people_on_board);
 }
@@ -291,7 +291,7 @@ void protodec_msg_11(unsigned char *buffer, int bufferlen, int msg_start, time_t
 	//int sea_state = protodec_henten(msg_start += 9, 4, buffer);
 	int water_temp = protodec_henten(msg_start += 4, 10, buffer);
 	
-	printf(" lat %.6f lon %.6f wind_speed %dkt wind_gust %dkt wind_dir %d wind_gust_dir %d air_temp %.1fC rel_humid %d%% dew_point %.1fC pressure %d pressure_tend %d visib %.1fNM water_level %.1fm wave_height %.1fm water_temp %.1fC",
+	/* printf(" lat %.6f lon %.6f wind_speed %dkt wind_gust %dkt wind_dir %d wind_gust_dir %d air_temp %.1fC rel_humid %d%% dew_point %.1fC pressure %d pressure_tend %d visib %.1fNM water_level %.1fm wave_height %.1fm water_temp %.1fC",
 		(float)latitude / 60000.0,
 		(float)longitude / 60000.0,
 		wind_speed,
@@ -306,7 +306,7 @@ void protodec_msg_11(unsigned char *buffer, int bufferlen, int msg_start, time_t
 		(float)horiz_visib_nm / 10.0,
 		(float)water_level / 10.0 - 10.0,
 		(float)wave_height_significant / 10.0,
-		(float)water_temp / 10.0 - 10.0);
+		(float)water_temp / 10.0 - 10.0);  */
 }
 
 void protodec_msg_bin(unsigned char *buffer, int bufferlen, int appid_fi, int msg_start, time_t received_t, unsigned long mmsi)
@@ -348,11 +348,11 @@ void protodec_pos(struct demod_state_t *d, int bufferlen, time_t received_t, uns
 	navstat = protodec_henten(38, 2, d->rbuffer);
 	heading = protodec_henten(38 + 22 + 28 + 28 + 12, 9, d->rbuffer);
 	
-	printf(" lat %.6f lon %.6f course %.0f speed %.1f rateofturn %d navstat %d heading %d",
+	/* printf(" lat %.6f lon %.6f course %.0f speed %.1f rateofturn %d navstat %d heading %d",
 		(float) latitude / 600000.0,
 		(float) longitude / 600000.0,
 		(float) course / 10.0, (float) sog / 10.0,
-		rateofturn, navstat, heading);
+		rateofturn, navstat, heading);     */
 	
 	if (my)
 		myout_ais_position(my, received_t, mmsi,
@@ -394,9 +394,9 @@ void protodec_4(struct demod_state_t *d, int bufferlen, time_t received_t, unsig
 		latitude |= 0xf8000000;
 	latit = ((float) latitude) / 10000.0 / 60.0;
 	
-	printf(" date %ld-%ld-%ld time %02ld:%02ld:%02ld lat %.6f lon %.6f",
+	/*printf(" date %ld-%ld-%ld time %02ld:%02ld:%02ld lat %.6f lon %.6f",
 		year, month, day, hour, minute,
-		second, latit, longit);
+		second, latit, longit);*/
 	
 	if (my)
 		myout_ais_basestation(my, received_t, mmsi,
@@ -470,10 +470,10 @@ void protodec_5(struct demod_state_t *d, int bufferlen, time_t received_t, unsig
 	draught = protodec_henten(294, 8, d->rbuffer);
 	// printf("Length: %d\nWidth: %d\nDraught: %f\n",A+B,C+D,(float)draught/10);
 	
-	printf(" name \"%s\" destination \"%s\" type %d length %d width %d draught %.1f",
+	/*printf(" name \"%s\" destination \"%s\" type %d length %d width %d draught %.1f",
 		name, destination, shiptype,
 		A + B, C + D,
-		(float) draught / 10.0);
+		(float) draught / 10.0);*/
 	
 	if (my)
 		myout_ais_vesseldata(my, received_t, mmsi,
@@ -499,8 +499,8 @@ void protodec_6(struct demod_state_t *d, int bufferlen, time_t received_t, unsig
 	int appid_dac = protodec_henten(72, 10, d->rbuffer);
 	int appid_fi = protodec_henten(82, 6, d->rbuffer);
 	
-	printf(" dst_mmsi %09ld seq %d retransmitted %d appid %d app_dac %d app_fi %d",
-		dst_mmsi, sequence, retransmitted, appid, appid_dac, appid_fi);
+	/*printf(" dst_mmsi %09ld seq %d retransmitted %d appid %d app_dac %d app_fi %d",
+		dst_mmsi, sequence, retransmitted, appid, appid_dac, appid_fi);*/
 		
 	if (appid_dac == 1) {
 		printf("(%s)", appid_ifm(appid_fi));
@@ -522,7 +522,7 @@ void protodec_7_13(struct demod_state_t *d, int bufferlen, time_t received_t, un
 	
 	pos = 40;
 	
-	printf(" buflen %d pos+32 %d", bufferlen, pos + 32);
+	/* printf(" buflen %d pos+32 %d", bufferlen, pos + 32); */
 	for (i = 0; i < 4 && pos + 32 <= bufferlen; pos += 32) {
 		dst_mmsi = protodec_henten(pos, 30, d->rbuffer);
 		sequence = protodec_henten(pos + 30, 2, d->rbuffer);
@@ -543,7 +543,7 @@ void protodec_8(struct demod_state_t *d, int bufferlen, time_t received_t, unsig
 	int appid_dac = protodec_henten(40, 10, d->rbuffer);
 	int appid_fi = protodec_henten(50, 6, d->rbuffer);
 	
-	printf(" appid %d app_dac %d app_fi %d", appid, appid_dac, appid_fi);
+	/* printf(" appid %d app_dac %d app_fi %d", appid, appid_dac, appid_fi); */
 	if (appid_dac == 1) {
 		printf("(%s)", appid_ifm(appid_fi));
 		protodec_msg_bin(d->rbuffer, bufferlen, appid_fi, 56, received_t, mmsi);
@@ -571,11 +571,11 @@ void protodec_18(struct demod_state_t *d, int bufferlen, time_t received_t, unsi
 	navstat = 15;   //NOT in B
 	
 	heading = protodec_henten(124, 9, d->rbuffer);
-	printf(" lat %.6f lon %.6f course %.0f speed %.1f rateofturn %d navstat %d heading %d",
+	/* printf(" lat %.6f lon %.6f course %.0f speed %.1f rateofturn %d navstat %d heading %d",
 		(float) latitude / 600000.0,
 		(float) longitude / 600000.0,
 		(float) course / 10.0, (float) sog / 10.0,
-		rateofturn, navstat, heading);
+		rateofturn, navstat, heading);*/
 	
 	if (my)
 		myout_ais_position(my, received_t, mmsi,
@@ -630,7 +630,7 @@ void protodec_19(struct demod_state_t *d, int bufferlen, time_t received_t, unsi
 	
 	// printf("Length: %d\nWidth: %d\n",A+B,C+D);
 	//printf("%09ld %d %d %f", mmsi, A + B, C + D);
-	printf(" name \"%s\" type %d length %d  width %d", name, shiptype, A+B, C+D);
+	/* printf(" name \"%s\" type %d length %d  width %d", name, shiptype, A+B, C+D); */
 	
 	if (my) {
 		myout_ais_vesselname(my, received_t, mmsi, name, destination);
@@ -658,8 +658,8 @@ void protodec_20(struct demod_state_t *d, int bufferlen)
 		timeout = protodec_henten(pos + 12 + 4, 3, d->rbuffer);
 		incr = protodec_henten(pos + 12 + 4 + 3, 11, d->rbuffer);
 		
-		printf(" reserve %d (ofs %d slots %d timeout %d incr %d)",
-			i+1, ofs, slots, timeout, incr);
+		/* printf(" reserve %d (ofs %d slots %d timeout %d incr %d)",
+			i+1, ofs, slots, timeout, incr);*/
 		i++;
 	}
 }
@@ -697,7 +697,7 @@ void protodec_24(struct demod_state_t *d, int bufferlen, time_t received_t, unsi
 		name[20] = 0;
 		remove_trailing_spaces(name, 20);
 		
-		printf(" name \"%s\"", name);
+		/* printf(" name \"%s\"", name); */
 		
 		if (my)
 			myout_ais_vesselname(my, received_t, mmsi, name, destination);
@@ -727,8 +727,8 @@ void protodec_24(struct demod_state_t *d, int bufferlen, time_t received_t, unsi
 		C = protodec_henten(132 + 9 + 9, 6, d->rbuffer);
 		D = protodec_henten(132 + 9 + 9 + 6, 6, d->rbuffer);
 		
-		printf(" callsign \"%s\" type %d length %d width %d",
-			callsign, shiptype, A+B, C+D);
+		/* printf(" callsign \"%s\" type %d length %d width %d",
+			callsign, shiptype, A+B, C+D); */
 		
 		if (my)
 			myout_ais_vesseldatab(my, received_t, mmsi,
@@ -892,7 +892,7 @@ void protodec_getdata(int bufferlen, struct demod_state_t *d)
 	if (skip_type[type])
 		return; // ignored by configuration
 	
-	printf("ch %c cntr %ld type %d mmsi %09ld:", d->chanid, d->cntr, type, mmsi);
+	/*printf("ch %c cntr %ld type %d mmsi %09ld:", d->chanid, d->cntr, type, mmsi);   */
 	
 	switch (type) {
 	case 1: /* position packets */
@@ -942,7 +942,9 @@ void protodec_getdata(int bufferlen, struct demod_state_t *d)
 		break;
 	}
 	
-	printf(" (!%s)\n", d->nmea);
+	/* printf(" (!%s)\n", d->nmea); */
+	// mc: NMEA message
+	printf("!%s\n", d->nmea);
 	fflush(stdout);
 }
 

@@ -1,0 +1,66 @@
+11/20/2012
+
+	compiled modified version of gnuais and got it to work with ais dispatcher
+
+	cd ../gnuais
+	git pull https://github.com/rubund/gnuais.git
+
+	only filed I worked on was src/protodec.c. Basically commented out most of the printf statements
+
+	to recompile:
+	    	cmake .
+    		make
+    		sudo make install
+	this creates an executable gnuais in /usr/local/bin. rename it to gnuais_mc
+
+	the command for AISHub is
+
+		gnuais_mc | aisdispatcher -i -G -H 87.121.76.11:2028,193.189.247.193:32161  (-G = debugger on)
+
+		gnuais_mc -c gnuais_sql.conf | aisdispatcher -i -G -H 87.121.76.11:2028  (with sql tracking)
+
+		run from /bbxais as you want to use the .conf files in that dir
+
+	use rake db:drop in /bbxais to clear sql tabels periodically
+
+11/17/2012
+	created ruby app bbxais to send UDP packets since I coudl nto get aisdispatcher to work
+
+every time machine is rebooted:
+
+	- open up terminal
+• cd bbxais
+• gnuais
+• open up new tab
+• rails c
+
+gnuais -c gnuais_test.conf to see segnal strength
+
+Radio settings
+• connect radio discriminator output to line-in in back of computer (blue, lower row)
+• select channels 1 or 2 manual on radio. listen on build in speaker and adjust squelch until white noise is constant. Turn volume to minimum
+• systems setting (top right gear symbol), sount, input tab
+• select analog line in
+• veryfy output volume slider is not on mute (output level seems to influence input sound level?). about 25% of the way seemed to work
+• configure ~/gnuais/gnuais.conf if necessary (see below)
+• launch /mauro/gnuais gnuais (gnuais | aisdispatcher -i -H data.aishub.net:2394 to send udp to aishub)
+• adjust line in volume on Sound settings until level on Channel 1 or 0 is 60-80% (turn SoundLevelLog to 1 in cconf fileto see sound level)
+
+
+gnuais > mauro.txt to generate dump
+
+installed aisdispacther by downloading the linux version and extracting the executable, then placing it in /usr/bin
+
+to create tables in mysql database:
+	sudo mysql BBX_development  < create_table.sql
+where create_table.sql is on github repo
+
+gnuais.conf:
+	mysql settings
+
+mysql_host localhost
+mysql_db BBX_development
+mysql_user mauro
+mysql_password peppino2011
+mysql_keepsmall yes
+mysql_oldlimit 800
