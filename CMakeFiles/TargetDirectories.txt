@@ -1,1 +1,1 @@
-/home/mauro/gnuais/src/CMakeFiles/gnuais.dir
+/home/pi/gnuais/src/CMakeFiles/gnuais.dir

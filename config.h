@@ -4,7 +4,7 @@
 
 /* #undef HAVE_GTK */
 
-#define HAVE_MYSQL
+/* #undef HAVE_MYSQL */
 
 /* #undef HAVE_PULSEAUDIO */
 

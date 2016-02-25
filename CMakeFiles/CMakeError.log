@@ -20,3 +20,59 @@ Source:
 
 int main(){return 0;}
 
+Determining if files mysql/mysql.h exist failed with the following output:
+Change Dir: /home/pi/gnuais/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTryCompileExec1741520964/fast"
+make[1]: Entering directory '/home/pi/gnuais/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1741520964.dir/build.make CMakeFiles/cmTryCompileExec1741520964.dir/build
+make[2]: Entering directory '/home/pi/gnuais/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/pi/gnuais/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1741520964.dir/CheckIncludeFiles.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec1741520964.dir/CheckIncludeFiles.c.o   -c /home/pi/gnuais/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+/home/pi/gnuais/CMakeFiles/CMakeTmp/CheckIncludeFiles.c:2:25: fatal error: mysql/mysql.h: No such file or directory
+ #include <mysql/mysql.h>
+                         ^
+compilation terminated.
+CMakeFiles/cmTryCompileExec1741520964.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec1741520964.dir/CheckIncludeFiles.c.o' failed
+make[2]: Leaving directory '/home/pi/gnuais/CMakeFiles/CMakeTmp'
+make[2]: *** [CMakeFiles/cmTryCompileExec1741520964.dir/CheckIncludeFiles.c.o] Error 1
+Makefile:118: recipe for target 'cmTryCompileExec1741520964/fast' failed
+make[1]: *** [cmTryCompileExec1741520964/fast] Error 2
+make[1]: Leaving directory '/home/pi/gnuais/CMakeFiles/CMakeTmp'
+
+Source:
+/* */
+#include <mysql/mysql.h>
+
+
+int main(){return 0;}
+
+Determining if files pulse/pulseaudio.h exist failed with the following output:
+Change Dir: /home/pi/gnuais/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTryCompileExec3862766179/fast"
+make[1]: Entering directory '/home/pi/gnuais/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3862766179.dir/build.make CMakeFiles/cmTryCompileExec3862766179.dir/build
+make[2]: Entering directory '/home/pi/gnuais/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/pi/gnuais/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3862766179.dir/CheckIncludeFiles.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec3862766179.dir/CheckIncludeFiles.c.o   -c /home/pi/gnuais/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+/home/pi/gnuais/CMakeFiles/CMakeTmp/CheckIncludeFiles.c:2:30: fatal error: pulse/pulseaudio.h: No such file or directory
+ #include <pulse/pulseaudio.h>
+                              ^
+compilation terminated.
+CMakeFiles/cmTryCompileExec3862766179.dir/build.make:57: recipe for target 'CMakeFiles/cmTryCompileExec3862766179.dir/CheckIncludeFiles.c.o' failed
+make[2]: *** [CMakeFiles/cmTryCompileExec3862766179.dir/CheckIncludeFiles.c.o] Error 1
+make[2]: Leaving directory '/home/pi/gnuais/CMakeFiles/CMakeTmp'
+Makefile:118: recipe for target 'cmTryCompileExec3862766179/fast' failed
+make[1]: *** [cmTryCompileExec3862766179/fast] Error 2
+make[1]: Leaving directory '/home/pi/gnuais/CMakeFiles/CMakeTmp'
+
+Source:
+/* */
+#include <pulse/pulseaudio.h>
+
+
+int main(){return 0;}
+
